@@ -86,6 +86,7 @@ nothing to commit, working tree clean
 - this will cause this local brach to track the remote branch
 
 ```bash
+git pull --set-upstream origin feature/ai-chatbot
 git push -u origin HEAD
 ```
 
