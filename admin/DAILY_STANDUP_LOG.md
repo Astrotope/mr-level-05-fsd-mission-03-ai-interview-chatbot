@@ -16,7 +16,7 @@
   - [CR] setup Jira and delegate initial tasks, invite members
   - [CR] 
   - [CR] 
-  - [JR] 
+  - [JR] unavailable
   - [JR] 
   - [JR] 
 
@@ -27,24 +27,24 @@
   - [CR] get to grips with gemeni API 
   - [CR] run code examples given
   - [CR] 
-  - [JR] 
+  - [JR] unavailable
   - [JR] 
   - [JR] 
 
 - **Blockers:**  [What is blocking me?]
-  - [CM] None.
+  - [CM] None :-)
   - [CR] None :)
-  - [JR] 
+  - [JR] unavailable
 
 - **Updates/Notes**: 
-  - [CM] 
+  - [CM] Walk team through GitHub & local dev. environment setup.
   - [CR] Live coding 11am-12pm
-  - [JR] 
+  - [JR] unavailable
 
 - **Action Items**: 
   - [CM] share standup notes with Sebin B
   - [CR] 
-  - [JR] 
+  - [JR] unavailable
 
 ---
 
