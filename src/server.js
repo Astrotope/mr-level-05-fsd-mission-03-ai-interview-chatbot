@@ -1,12 +1,25 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import "dotenv/config";
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const apiRoutes = require('./apiRoutes');
 
-// Make sure to include these imports:
-// import { GoogleGenerativeAI } from "@google/generative-ai";
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const app = express();
+const PORT = process.env.PORT || 5567;
 
-const prompt = "Write a story about a magic backpack. Keep it to 50 words";
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());
 
-const result = await model.generateContent(prompt);
-console.log(result.response.text());
+// Routes
+app.use('/api', apiRoutes);
+
+// Conditionally start the server only if we're not in a test environment
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+  });
+}
+
+// Export the app, not the server instance
+module.exports = app;
+
