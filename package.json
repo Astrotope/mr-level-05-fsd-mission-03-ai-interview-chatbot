@@ -1,0 +1,43 @@
+{
+  "name": "ai_job_interviewer",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Application to provide practice job interviews, using generative AI.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Astrotope/mr-level-05-fsd-mission-03-research.git"
+  },
+  "keywords": [
+    "ai",
+    "interview",
+    "job",
+    "practice",
+    "developer",
+    "job",
+    "transition",
+    "change",
+    "management"
+  ],
+  "author": "Team AI",
+  "license": "MIT",
+  "bugs": {
+    "url": "git+https://github.com/Astrotope/mr-level-05-fsd-mission-03-ai-interview-chatbot.git"
+  },
+  "homepage": "https://github.com/Astrotope/mr-level-05-fsd-mission-03-ai-interview-chatbot#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2"
+  }
+}
