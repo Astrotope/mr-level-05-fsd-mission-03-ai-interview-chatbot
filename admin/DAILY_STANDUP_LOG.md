@@ -13,7 +13,7 @@
   - [CM] setup team repository in GitHub
   - [CM] team kickoff meeting 2pm with [CR][JR]
   - [CM] sent out some reading notes - Google Generative AI SDK for node.js
-  - [CR] 
+  - [CR] setup Jira and delegate initial tasks, invite members
   - [CR] 
   - [CR] 
   - [JR] 
@@ -24,8 +24,8 @@
   - [CM] work on express server, and api-router tests and code
   - [CM] add TOC, TODO, and sections to README.md in main repo
   - [CM] get team setup for GitHub access, and dev environment & talk about git etiquette 
-  - [CR] 
-  - [CR] 
+  - [CR] get to grips with gemeni API 
+  - [CR] run code examples given
   - [CR] 
   - [JR] 
   - [JR] 
@@ -33,12 +33,12 @@
 
 - **Blockers:**  [What is blocking me?]
   - [CM] None.
-  - [CR] 
+  - [CR] None :)
   - [JR] 
 
 - **Updates/Notes**: 
   - [CM] 
-  - [CR] 
+  - [CR] Live coding 11am-12pm
   - [JR] 
 
 - **Action Items**: 
