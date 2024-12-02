@@ -18,13 +18,13 @@ expectedResult = {
         ]
     }
 
-console.log(expectedResult);
-console.log(expectedResult.jobTitle);
+// console.log(expectedResult);
+// console.log(expectedResult.jobTitle);
 
 describe('startInterview() tests', () => {
   test('should return JSON object that matches expected result', () => {
     const result = startInterview(jobTitle);
-    console.log(result, expectedResult);
+    // console.log(result, expectedResult);
     expect(result).toStrictEqual(expectedResult);
   });
 

@@ -5,9 +5,9 @@
  * @returns {Object} Interview session data including question and chat history
  */
 function startInterview(input) {
-    console.log(input);
+    // console.log(input);
     const jobTitle = input;
-    console.log(jobTitle);
+    // console.log(jobTitle);
 
     if (!jobTitle) {
         throw new Error('Job title is required');

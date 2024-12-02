@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "jest --config jest.config.json"
+    "test": "jest --config jest.config.json --coverage"
   },
   "repository": {
     "type": "git",
