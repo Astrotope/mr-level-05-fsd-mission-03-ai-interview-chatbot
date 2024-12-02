@@ -3,8 +3,8 @@ const request = require('supertest');
 const apiRoutes = require('./apiRoutes'); // Adjust path as necessary
 
 // Mock implementations of API functions with named exports
-jest.mock('./start', () => ({
-  start: jest.fn().mockImplementation((input) => ({ text: "start" }))
+jest.mock('./services/interviewService', () => ({
+  startInterview: jest.fn().mockImplementation((input) => ({ text: "start" }))
 }));
 jest.mock('./respond', () => ({
   respond: jest.fn().mockImplementation((input) => ({ text: "respond" }))
