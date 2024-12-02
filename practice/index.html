@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #startForm {
+            margin-bottom: 20px;
+        }
+        #chatContainer {
+            display: none;
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .ai-message {
+            background-color: #e3f2fd;
+            margin-right: 20%;
+        }
+        .user-message {
+            background-color: #f5f5f5;
+            margin-left: 20%;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #2196f3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1976d2;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #responseForm {
+            display: none;
+        }
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        .loading-text {
+            display: none;
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        .loading .loading-text {
+            display: block;
+        }
+        .typing-indicator {
+            display: none;
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 20%;
+            margin-bottom: 10px;
+        }
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #2196f3;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: typing 1s infinite;
+        }
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+            margin-right: 0;
+        }
+        @keyframes typing {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Interview Assistant</h1>
+        
+        <form id="startForm">
+            <input type="text" id="jobTitle" placeholder="Enter the job title" required>
+            <button type="submit">Start Interview</button>
+            <div class="loading-text">Starting interview...</div>
+        </form>
+
+        <div id="chatContainer">
+            <div class="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <form id="responseForm">
+            <textarea id="response" rows="3" placeholder="Type your response..." required></textarea>
+            <button type="submit">Send Response</button>
+            <div class="loading-text">Sending response...</div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const API_BASE_URL = 'http://localhost:5998';
+            let currentJobTitle = '';
+            let messageHistory = [];
+            const typingIndicator = document.querySelector('.typing-indicator');
+
+            // Enable all form elements immediately
+            document.querySelectorAll('input, textarea, button').forEach(el => {
+                el.removeAttribute('disabled');
+            });
+
+            function setLoading(form, isLoading) {
+                const button = form.querySelector('button');
+                const inputs = form.querySelectorAll('input, textarea');
+                if (isLoading) {
+                    form.classList.add('loading');
+                    button.disabled = true;
+                    inputs.forEach(input => input.disabled = true);
+                } else {
+                    form.classList.remove('loading');
+                    button.disabled = false;
+                    inputs.forEach(input => input.disabled = false);
+                }
+            }
+
+            function showTypingIndicator() {
+                typingIndicator.style.display = 'block';
+                const chatContainer = document.getElementById('chatContainer');
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            function hideTypingIndicator() {
+                typingIndicator.style.display = 'none';
+            }
+
+            function displayMessage(text, isAI) {
+                hideTypingIndicator();
+                const chatContainer = document.getElementById('chatContainer');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${isAI ? 'ai-message' : 'user-message'}`;
+                messageDiv.textContent = text;
+                chatContainer.insertBefore(messageDiv, typingIndicator);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            document.getElementById('startForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                setLoading(form, true);
+                
+                currentJobTitle = document.getElementById('jobTitle').value;
+                
+                try {
+                    showTypingIndicator();
+                    const response = await fetch(`${API_BASE_URL}/api/interview/start`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ jobTitle: currentJobTitle })
+                    });
+                    
+                    const data = await response.json();
+                    if (response.ok) {
+                        messageHistory = data.history;
+                        document.getElementById('chatContainer').style.display = 'block';
+                        document.getElementById('responseForm').style.display = 'block';
+                        document.getElementById('startForm').style.display = 'none';
+                        
+                        // Display initial messages
+                        displayMessage(`I am applying for the ${currentJobTitle} position.`, false);
+                        displayMessage(data.question, true);
+                    } else {
+                        hideTypingIndicator();
+                        alert(data.error || 'Failed to start interview');
+                        setLoading(form, false);
+                    }
+                } catch (error) {
+                    hideTypingIndicator();
+                    alert('Error starting interview: ' + error.message);
+                    setLoading(form, false);
+                }
+            });
+
+            document.getElementById('responseForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const responseInput = document.getElementById('response');
+                const userResponse = responseInput.value;
+                
+                setLoading(form, true);
+                displayMessage(userResponse, false);
+                responseInput.value = '';
+                showTypingIndicator();
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}/api/interview/respond`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            jobTitle: currentJobTitle,
+                            response: userResponse,
+                            history: messageHistory
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    if (response.ok) {
+                        messageHistory = data.history;
+                        displayMessage(data.question, true);
+                    } else {
+                        alert(data.error || 'Failed to get response');
+                    }
+                } catch (error) {
+                    alert('Error sending response: ' + error.message);
+                } finally {
+                    hideTypingIndicator();
+                    setLoading(form, false);
+                    responseInput.focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
