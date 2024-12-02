@@ -52,31 +52,31 @@
 ### **Date:** Tue 3, Dec, 2024
 
 - **Yesterday:**  [What I completed?]
+  - [CM] Refactoring code and creating unit and integration tests.
   - [CM] 
   - [CM] 
-  - [CM] 
+  - [CR] Setting-up GitHub - Feature braches and dev. env. setup.
   - [CR] 
   - [CR] 
-  - [CR] 
-  - [JR] 
+  - [JR] Reading Google Generative AI Docs, and running practice code.
   - [JR] 
   - [JR] 
 
 - **Today:**  [What I'm working on today?]
+  - [CM] Get live tests running, and push the code to GitHub.
   - [CM] 
   - [CM] 
-  - [CM] 
+  - [CR] Continue practice Google Gen AI SDK - System prompts and responses.
+  - [CR] Get user prompt input text to get a response.
   - [CR] 
-  - [CR] 
-  - [CR] 
-  - [JR] 
+  - [JR] Practice on the text generation.
   - [JR] 
   - [JR] 
 
 - **Blockers:**  [What is blocking me?]
-  - [CM] 
-  - [CR] 
-  - [JR] 
+  - [CM] Stuck on failing live tests. 
+  - [CR] None.
+  - [JR] None.
 
 - **Updates/Notes**: 
   - [CM] 
@@ -85,6 +85,8 @@
 
 - **Action Items**: 
   - [CM] share standup notes with Sebin B
+  - [CM] get live tests passing and push code.
+  - [CM] setup separate feature branch - with refactored code.
   - [CR] 
   - [JR] 
 
