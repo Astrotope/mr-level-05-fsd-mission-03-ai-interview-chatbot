@@ -187,6 +187,149 @@ echo GEMINI_MODEL_NAME="gemini-1.5-flash" > .env
 
 ---
 
+## Developer Session Workflow
+
+### Go to branch folder
+
+```bash
+cd [your_local_path]/ai-chatbot
+```
+
+### Check your in the feature branch
+
+```bash
+git staus
+```
+
+```bash
+On branch feature/ai-chatbot
+nothing to commit, working tree clean
+```
+
+### Pull from remote
+
+git pull
+[resolve any conflicts]
+
+### Run npm install [in-case packages have been updated.
+
+[while we are worknig on the backend]
+[we will move package.json to the root when we start on the frontend, for now package.json is in ./src/]
+
+```bash
+cd src
+npm install
+```
+
+### Run tests in-case anything was broken with the pull-merge, or package update [test are run in ./src]
+
+```bash
+npm test
+```
+
+- Sample output
+
+```bash
+> ai_job_interviewer@0.0.1 test
+> jest --config jest.config.json
+
+ PASS  ./start.test.js
+  start()
+    ✓ should return the input it receives (9 ms)
+
+ PASS  ./respond.test.js
+  respond()
+    ✓ should return the input it receives (11 ms)
+
+ PASS  ./analyse.test.js
+  analyse()
+    ✓ should return the input it receives (10 ms)
+
+ PASS  ./server.test.js
+  Test API endpoints
+    ✓ POST /api/start (37 ms)
+    ✓ POST /api/respond (4 ms)
+    ✓ POST /api/analyse (3 ms)
+
+ PASS  ./apiRoutes.test.js
+  Test API routes
+    ✓ POST /api/start (36 ms)
+    ✓ POST /api/respond (3 ms)
+    ✓ POST /api/analyse (2 ms)
+
+Test Suites: 5 passed, 5 total
+Tests:       9 passed, 9 total
+Snapshots:   0 total
+Time:        1.426 s, estimated 2 s
+Ran all test suites.
+```
+
+### Check if any unstaged changes
+
+```bash
+cd .. [important to be in root of repo.]
+git add .
+git status
+On branch feature/ai-chatbot
+Your branch is up to date with 'origin/feature/ai-chatbot'.
+
+nothing to commit, working tree clean
+```
+
+- If any changes...
+
+```bash
+git commit -m "update message reflecting changes."
+```
+
+### Push updated local to remote
+
+```bash
+git push -u origin HEAD
+```
+-Sample output - everything up to date
+
+```bash
+git push -u origin HEAD                                                                                                                                                                               ─╯
+branch 'feature/ai-chatbot' set up to track 'origin/feature/ai-chatbot'.
+Everything up-to-date
+```
+
+### Make your code changes
+
+*** [Make code changes here] ***
+
+
+### Before committing pull - to get changes from other developers, and deal with any merge conflicts.
+
+```bash
+git pull
+```
+
+### Update packages if any changes to package.json
+
+```bash
+cd src
+npm install
+```
+
+### Run tests [in ./src folder]
+
+```bash 
+npm test [Fix any failing tests]
+```
+
+### Push to remote feature branch
+
+```bash
+git add .
+git status [check you didn't add anything you shouldn't. Like node_modules, or .env][Use 'git reset' if you need to revert the add]
+git commit -m "your commit message"
+git push -u origin HEAD
+```
+
+---
+
 
 ## Useful Git Commands [please feel free to add to the list]
 
