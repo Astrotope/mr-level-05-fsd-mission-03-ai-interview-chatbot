@@ -96,30 +96,32 @@
 ### **Date:** Wed 4, Dec, 2024
 
 - **Yesterday:**  [What I completed?]
-  - [CM] Coded backend server.js, apiRoutes.js, and interviewService.js, and associtated tests.
+  - [CM] Coded backend server.js, apiRoutes.js, and interviewService.js, and associated tests.
   - [CM] Added testing code with mocks and with live Gemini.
   - [CM] Coded backend
-  - [CR] 
-  - [CR] 
+  - [CM] Moved codebase from classic JS to ES modules
+  - [CM] Fixed jest to work with ES modules
+  - [CR] Completed practice server and got ai working/responding
+  - [CR] "Designed" front end for use
   - [CR] 
   - [JR] 
   - [JR] 
   - [JR] 
 
 - **Today:**  [What I'm working on today?]
+  - [CM] Prompt engineering
   - [CM] 
   - [CM] 
-  - [CM] 
-  - [CR] 
-  - [CR] 
-  - [CR] 
+  - [CR] Front end testing (playwrite/playright, puppeteer etc)
+  - [CR] Go through Cameron's server.js, understand it
+  - [CR] Code review Cameron's server.js, by // [CR] etccc
   - [JR] 
   - [JR] 
   - [JR] 
 
 - **Blockers:**  [What is blocking me?]
-  - [CM] 
-  - [CR] 
+  - [CM] None.
+  - [CR] None.
   - [JR] 
 
 - **Updates/Notes**: 
@@ -129,7 +131,7 @@
 
 - **Action Items**: 
   - [CM] share standup notes with Sebin B
-  - [CR] 
+  - [CR] DO NOT PUSH my practice server.js
   - [JR] 
  
 ---
