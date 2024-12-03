@@ -96,9 +96,9 @@
 ### **Date:** Wed 4, Dec, 2024
 
 - **Yesterday:**  [What I completed?]
-  - [CM] 
-  - [CM] 
-  - [CM] 
+  - [CM] Coded backend server.js, apiRoutes.js, and interviewService.js, and associtated tests.
+  - [CM] Added testing code with mocks and with live Gemini.
+  - [CM] Coded backend
   - [CR] 
   - [CR] 
   - [CR] 
