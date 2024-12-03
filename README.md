@@ -30,7 +30,7 @@ GEMINI_MODEL_NAME="gemini-1.5-flash"
 npm test
 ```
 
-### Run test using Google Gemini live
+### Run tests using Google Gemini live
 
 [in root ./ not ./src]
 ```bash
