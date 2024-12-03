@@ -249,5 +249,5 @@ Based on this short exchange, the candidate demonstrates *some* technical skills
 The interview should continue with more probing technical questions, focusing on specifics and requiring detailed explanations. The candidate needs to demonstrate a deeper understanding of the technologies used and a more structured approach to problem-solving. A final decision should be deferred until a more comprehensive assessment is completed.
 
 
-``
+```
 
