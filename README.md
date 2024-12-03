@@ -8,11 +8,13 @@
 
 ## What we are working on.
 
-- [CM] serve.test.js, server.js, apiRoutes.test.js, apiRoutes.js, respond.js, analyse.js along with their .test.js files. ./services/interviewServices.js &  ./services/interviewServices.test.js 
+- [CM] serve.test.js, server.js, apiRoutes.test.js, apiRoutes.js, respond.js, analyse.js along with their .test.js files. ./services/interviewServices.js &  ./services/interviewServices.test.js. I'm working in ./src and ./frontend and with package.json and test setup files in ./
 - [CR]
 - [JR]
 
-## Running tests and the backend server
+
+
+## Running tests, the backend server, & the frontend server
 
 ### Setup up .env
 
@@ -44,10 +46,22 @@ set USE_REAL_AI=true && npm test
 $env:USE_REAL_AI="true"; npm test
 ```
 
-### Run the server
+### Run the frontend React/Vite(HMR) server
 
-[in the root ./ not ./src]
+[from the root ./]
 ```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Run the backend express server
+
+[from the root ./]
+```bash
+cd src
+npm install
+cd ..
 npm start
 ```
 
