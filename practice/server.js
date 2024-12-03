@@ -3,7 +3,7 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
-import { processInterviewInteraction } from "./ai-chatbot-stateless.js";
+import { processInterviewInteraction, analyzeInterview } from "./ai-chatbot-stateless.js";
 
 const app = express();
 app.use(cors());
@@ -29,7 +29,7 @@ app.post('/api/interview/start', async (req, res) => {
                     parts: [{ text: `I am applying for the ${jobTitle} position. Please start the interview with your first question.` }]
                 },
                 {
-                    role: "model",
+                    role: "assistant",
                     parts: [{ text: question }]
                 }
             ]
@@ -60,7 +60,7 @@ app.post('/api/interview/respond', async (req, res) => {
         
         // Add AI's question to history
         updatedHistory.push({
-            role: "model",
+            role: "assistant",
             parts: [{ text: question }]
         });
 
@@ -68,6 +68,26 @@ app.post('/api/interview/respond', async (req, res) => {
             jobTitle,
             question,
             history: updatedHistory
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/interview/analyze', async (req, res) => {
+    try {
+        const { jobTitle, history } = req.body;
+        if (!jobTitle || !history) {
+            return res.status(400).json({ 
+                error: 'Job title and history are required' 
+            });
+        }
+
+        const analysis = await analyzeInterview(jobTitle, history);
+        res.json({
+            jobTitle,
+            analysis,
+            history
         });
     } catch (error) {
         res.status(500).json({ error: error.message });

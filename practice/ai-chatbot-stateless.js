@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: resolve(__dirname, '../.env') });
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-const modelName = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL_NAME });
 
 
 /**
@@ -17,31 +17,37 @@ const modelName = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
  * @returns {Promise<string>} The AI's next question
  */
 async function processInterviewInteraction(jobTitle, history = []) {
-    // Configure AI to act as an interviewer
-    const systemInstruction = `You are an interviewer for a ${jobTitle} position. After each response from the applicant, ask a relevant follow-up question. Do not analyze, give feedback, or provide any advice; simply ask a natural follow-up question based on the previous response. Do not include the following prefixes in your response: "[interviewer] " and "[applicant] ".`;
-
-    const model = genAI.getGenerativeModel({ 
-        model: modelName,
-        systemInstruction: systemInstruction
-    });
-
-    // If this is the first interaction, start with an opening question
-    if (history.length === 0) {
-        history = [{
-            role: "user",
-            parts: [{ text: `I am applying for the ${jobTitle} position. Please start the interview with your first question.` }]
-        }];
-    }
-
     try {
+        // If this is the first interaction, start with an opening question
+        if (history.length === 0) {
+            history = [{
+                role: "user",
+                parts: [{ text: `I am applying for the ${jobTitle} position. Please start the interview with your first question.` }]
+            }];
+        }
+
         // Format history for the AI model
         const formattedHistory = history.map(msg => ({
             role: msg.role === "assistant" ? "model" : msg.role,
             parts: Array.isArray(msg.parts) ? msg.parts : [{ text: msg.parts }]
         }));
 
-    // Send the history to the model to get the next question
-    const chat = model.startChat({ history: formattedHistory });
+        // Create chat with context
+        const chat = model.startChat({
+            history: [
+                {
+                    role: "user",
+                    parts: [{ text: `You are an interviewer for a ${jobTitle} position. After each response from the applicant, ask a relevant follow-up question. Do not analyze, give feedback, or provide any advice; simply ask a natural follow-up question based on the previous response. After 1 follow up question, change the subject slightly so you don't go too deep. Do not include the following prefixes in your response: "[interviewer] " and "[applicant] ".` }]
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "I understand. I will act as a professional interviewer and ask relevant follow-up questions without providing feedback or analysis." }]
+                },
+                ...formattedHistory
+            ]
+        });
+
+        // Send the message and get the response
         const result = await chat.sendMessageStream(
             formattedHistory[formattedHistory.length - 1].parts[0].text
         );
@@ -59,4 +65,54 @@ async function processInterviewInteraction(jobTitle, history = []) {
     }
 }
 
-export { processInterviewInteraction };
+async function analyzeInterview(jobTitle, history = []) {
+    try {
+        // Format history for the AI model
+        const formattedHistory = history.map(msg => ({
+            role: msg.role === "assistant" ? "model" : msg.role,
+            parts: Array.isArray(msg.parts) ? msg.parts : [{ text: msg.parts }]
+        }));
+
+        // Create chat with context
+        const chat = model.startChat({
+            history: [
+                {
+                    role: "user",
+                    parts: [{ text: `You are an expert interview coach analyzing a candidate's responses for a ${jobTitle} position. 
+                    Focus only on the applicant's responses and provide constructive feedback on:
+                    1. Key strengths demonstrated in their answers
+                    2. Specific examples where they communicated effectively
+                    3. Areas where their responses could be improved
+                    4. Actionable suggestions for better answers
+                    5. Finally, give a percentage chance they would be hired.
+                    
+                    Only analyze the applicant's responses, not the interviewer's questions.
+                    Be constructive and encouraging while providing specific examples from their responses.` }]
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "I understand. I will analyze only the candidate's responses and provide detailed, constructive feedback focused on their interview performance." }]
+                },
+                ...formattedHistory
+            ]
+        });
+
+        // Send analysis request
+        const result = await chat.sendMessageStream(
+            "Please analyze the candidate's responses and provide detailed feedback on their interview performance."
+        );
+
+        // Capture AI's analysis
+        let aiResponse = "";
+        for await (const chunk of result.stream) {
+            aiResponse += chunk.text();
+        }
+
+        return aiResponse;
+    } catch (error) {
+        console.error('Error in analyzeInterview:', error);
+        throw error;
+    }
+}
+
+export { processInterviewInteraction, analyzeInterview };
