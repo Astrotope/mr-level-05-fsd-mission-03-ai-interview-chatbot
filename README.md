@@ -16,7 +16,7 @@
 
 ### Setup up .env
 
-[.env is not in the root ./]
+[.env is now in the root ./]
 ```text
 GEMINI_API_KEY="YOUR_KEY"
 GEMINI_MODEL_NAME="gemini-1.5-flash"
