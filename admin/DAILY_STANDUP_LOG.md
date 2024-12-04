@@ -140,31 +140,36 @@
 ### **Date:** Thu 5, Dec, 2024
 
 - **Yesterday:**  [What I completed?]
-  - [CM] 
-  - [CM] 
-  - [CM] 
+  - [CM] Relooked at prompts for analysis, kept harshness
+  - [CM] Interface original front end with backend and tests
+  - [CM] Python back end
+  - [CM] Started presentation with PPT
+  - [CM] Created architecture diagram
+  - [CM] Took a look at rebuilding in Deno
+  - [CR] Retried to build front end in react
+  - [CR] Collated screenshots for PPT
   - [CR] 
-  - [CR] 
-  - [CR] 
-  - [JR] 
-  - [JR] 
+  - [JR] Fixing bugs, deleting node packages
+  - [JR] Created a working backend using sonnet claude model
   - [JR] 
 
 - **Today:**  [What I'm working on today?]
-  - [CM] 
-  - [CM] 
-  - [CM] 
-  - [CR] 
-  - [CR] 
-  - [CR] 
-  - [JR] 
-  - [JR] 
+  - [CM] Finish PPT
+  - [CM] Push current feature branch to master
+  - [CM] Complete pull request for task, show on doc
+  - [CM] Attempt Deno and (maybe) try chat-gpt as a gemeni replacement backend
+  - [CR] Finish my slides, screenshots
+  - [CR] Continue with react front end
+  - [CR] Add feature branch for my original practice (at the end)
+  - [CR] Add some tasks to Jira
+  - [JR] Review own code, relook at windwurf's edits
+  - [JR] Finish PPT
   - [JR] 
 
 - **Blockers:**  [What is blocking me?]
-  - [CM] 
-  - [CR] 
-  - [JR] 
+  - [CM] None
+  - [CR] None
+  - [JR] None
 
 - **Updates/Notes**: 
   - [CM] 
@@ -173,7 +178,7 @@
 
 - **Action Items**: 
   - [CM] share standup notes with Sebin B
-  - [CR] 
+  - [CR] Approve pull request from CM
   - [JR] 
  
 ---
