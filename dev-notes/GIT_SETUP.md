@@ -10,7 +10,7 @@
 ### Clone the repo
 ```bash
 mkdir mission-03-ai-interview-chatbot && cd mission-03-ai-interview-chatbot/
-git clone https://github.com/Astrotope/mr-level-05-fsd-mission-03-ai-interview-chatbot cd mr-level-05-fsd-mission-03-ai-interview-chatbot
+git clone https://github.com/Astrotope/mr-level-05-fsd-mission-03-ai-interview-chatbotcd mr-level-05-fsd-mission-03-ai-interview-chatbot
 ```
 
 ### Setup the remote
@@ -19,7 +19,7 @@ git remote remove origin
 git remote add origin https://<PAT>@github.com/Astrotope/mr-level-05-fsd-mission-03-ai-interview-chatbot.git
 ```
 
-### Confirm your in the main branch 
+### Confirm your in the main branch
 
 ```bash
 git status
@@ -35,7 +35,7 @@ nothing to commit, working tree clean
 - These settings are local and only apply to this repository.
 
 ```bash
-git config user.name "Dev Name" 
+git config user.name "Dev Name"
 git config user.email "dev_email@missionreadyhq.com"
 ```
  
@@ -47,7 +47,7 @@ git config user.email "dev_email@missionreadyhq.com"
 
 ```bash
 git worktree add -b feature/ai-chatbot ../ai-chatbot 
-cd ../ai-chatbot  # Check your in the feature branch.
+cd ../ai-chatbot# Check your in the feature branch.
 git status
 ```
 ```bash
@@ -150,7 +150,7 @@ cat .gitignore
 
 ```bash
 [mac/linux]
-touch .gitignore 
+touch .gitignore
 echo "node_modules/" >> .gitignore
 echo ".env" >> .gitignore
 
